@@ -10,11 +10,6 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v2
 
-      - name: Install Snapcraft and Login
-        uses: samuelmeuli/action-snapcraft@v1
-        with:
-          snapcraft_token: ${{ secrets.snapcraft_nomadik_token }}
-
       - name: Build nomadik
         uses: snapcore/action-build@v1
         with:
