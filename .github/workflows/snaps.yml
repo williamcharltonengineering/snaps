@@ -3,7 +3,7 @@ name: Publish Snaps
 on: push
 
 jobs:
-  snapcraft:
+  nomadik:
     runs-on: ubuntu-latest
 
     steps:
@@ -11,9 +11,12 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build nomadik
+        id: build
         uses: snapcore/action-build@v1
         with:
           path: nomad
+          snapcraft-channel: latest/edge
+          snapcraft-args: --verbose
 
       - uses: snapcore/action-publish@v1
         with:
