@@ -1,0 +1,37 @@
+name: nomadik
+version: 1.4.3
+base: core20
+summary: Easily Deploy Applicatrions at Any Scale (arm64)
+description: |
+  Nomad is a single binary that schedules applications and services on Linux,
+  Windows, and Mac. It is an open source scheduler that uses a declarative job
+  file for scheduling virtualized, containerized, and standalone applications.
+type: app
+grade: devel
+architectures: [arm64]
+confinement: strict
+
+apps:
+  nomad:
+    command: nomad
+    plugs:
+      - network
+      - home
+
+parts:
+  nomad:
+    plugin: nil
+    override-build: |
+      echo "Building for: $SNAPCRAFT_TARGET_ARCH"
+      curl \
+        --retry 3 \
+        --fail \
+        -SL \
+        -o nomad_$SNAPCRAFT_PROJECT_VERSION_linux_$SNAPCRAFT_TARGET_ARCH.zip \
+        https://releases.hashicorp.com/nomad/$SNAPCRAFT_PROJECT_VERSION/nomad_$SNAPCRAFT_PROJECT_VERSION_linux_$SNAPCRAFT_TARGET_ARCH.zip
+      # source-checksum: sha256/21b3afc78bca4789ac271a855e2c4a993876d0d3f84499692d0d9dc5c8abf9ca
+      unzip -o nomad_$SNAPCRAFT_PROJECT_VERSION_linux_$SNAPCRAFT_TARGET_ARCH.zip -d ../install
+
+build-packages:
+  - curl
+  - unzip
