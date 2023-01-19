@@ -11,22 +11,16 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build nomadik for arm64
-        id: build
+        id: build-arm64
         uses: snapcore/action-build@v1
         with:
           path: nomadik-arm64
           snapcraft-channel: latest/edge
           snapcraft-args: --verbose
 
-      - uses: snapcore/action-publish@v1
-        env:
-          SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_NOMADIK_TOKEN }}
-        with:
-          snap: ${{ steps.build.outputs.snap }}
-          release: edge
 
       - name: Build nomadik for amd64
-        id: build
+        id: build-amd64
         uses: snapcore/action-build@v1
         with:
           path: nomadik-amd64
@@ -37,5 +31,12 @@ jobs:
         env:
           SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_NOMADIK_TOKEN }}
         with:
-          snap: ${{ steps.build.outputs.snap }}
+          snap: ${{ steps.build-arm64.outputs.snap }}
+          release: edge
+
+      - uses: snapcore/action-publish@v1
+        env:
+          SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_NOMADIK_TOKEN }}
+        with:
+          snap: ${{ steps.build-amd64.outputs.snap }}
           release: edge
