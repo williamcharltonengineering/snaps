@@ -10,11 +10,26 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v2
 
-      - name: Build nomadik
+      - name: Build nomadik for arm64
         id: build
         uses: snapcore/action-build@v1
         with:
-          path: nomad
+          path: nomadik-arm64
+          snapcraft-channel: latest/edge
+          snapcraft-args: --verbose
+
+      - uses: snapcore/action-publish@v1
+        env:
+          SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_NOMADIK_TOKEN }}
+        with:
+          snap: ${{ steps.build.outputs.snap }}
+          release: edge
+
+      - name: Build nomadik for amd64
+        id: build
+        uses: snapcore/action-build@v1
+        with:
+          path: nomadik-amd64
           snapcraft-channel: latest/edge
           snapcraft-args: --verbose
 
