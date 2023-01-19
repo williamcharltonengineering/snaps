@@ -4,7 +4,7 @@ on: push
 
 jobs:
   snapcraft:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Check out Git repository
@@ -17,6 +17,9 @@ jobs:
           use_lxd: true
 
       - name: Build nomadik
-        run: |
-          cd nomad
-          sg lxd -c 'snapcraft'
+        uses: snapcore/action-build@v1
+        with:
+          path: nomad
+        # run: |
+        #   cd nomad
+        #   sg lxd -c 'snapcraft'
