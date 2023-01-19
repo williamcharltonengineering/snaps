@@ -14,8 +14,9 @@ jobs:
         uses: samuelmeuli/action-snapcraft@v1
         with:
           snapcraft_token: ${{ secrets.snapcraft_nomadik_token }}
+          use_lxd: true
 
       - name: Build nomadik
         run: |
           cd nomad
-          snapcraft
+          sg lxd -c 'snapcraft'
