@@ -3,18 +3,19 @@ name: Publish Snaps
 on: push
 
 jobs:
-  my-job:
+  snapcraft:
     runs-on: ubuntu-22.04
 
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v2
 
-      - name: Install Snapcraft
+      - name: Install Snapcraft and Login
         uses: samuelmeuli/action-snapcraft@v1
+        with:
+          snapcraft_token: ${{ secrets.snapcraft_nomadik_token }}
 
-      # You can now run Snapcraft shell commands
-      - name: Use Snapcraft
+      - name: Build nomadik
         run: |
           cd nomad
           snapcraft
