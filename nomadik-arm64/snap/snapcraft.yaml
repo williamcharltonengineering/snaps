@@ -24,12 +24,20 @@ architectures:
 
 confinement: strict
 
+plugs:
+  nomadik-config:
+    interface: personal-files
+    read:
+    - $HOME/nomad
+
 apps:
   nomad:
-    command: nomad
+    command: nomad agent -config nomad/config.hcl
+    daemon: simple
     plugs:
       - network
       - home
+      - nomadik-config
 
 parts:
   nomad:
