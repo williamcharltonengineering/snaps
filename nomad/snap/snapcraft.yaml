@@ -1,9 +1,21 @@
 name: nomadik
 version: 1.4.3
 base: core22
-summary: Hashicorp Nomad packaged as Snap (arm64)
+summary: Hashicorp Nomad packaged as Snap
 description: |
-  A simple and flexible scheduler and orchestrator to deploy and manage containers and non-containerized applications across on-prem and clouds at scale.
+  Since the snap named `nomad` was taken, I created `nomadik` so I can support IoT, On Premise and Edge Computing workloads on multiple platforms with Hashicorp's Nomad.
+
+  Hashicorp's website describes `nomad` on https://developer.hashicorp.com/nomad as:
+
+  "A simple and flexible scheduler and orchestrator to deploy and manage containers and non-containerized applications across on-prem and clouds at scale."
+
+  Github repository of my published Snaps (including this one): https://github.com/williamcharltonengineering/snaps
+
+contact: will@williamcharltonengineering.com
+issues: https://github.com/williamcharltonengineering/snaps/issues
+source-code: https://github.com/williamcharltonengineering/snaps
+website: https://williamcharltonengineering.com
+
 type: app
 grade: devel
 architectures:
