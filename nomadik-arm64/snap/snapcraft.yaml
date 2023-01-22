@@ -36,7 +36,7 @@ plugs:
 
 apps:
   nomad:
-    command: nomad agent -config nomad/config.hcl
+    command: nomad agent -config $SNAP_USER_COMMON/agent.hcl
     daemon: simple
     plugs:
       - network
