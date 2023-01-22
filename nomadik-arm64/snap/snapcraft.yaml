@@ -25,10 +25,14 @@ architectures:
 confinement: strict
 
 plugs:
-  nomadik-config:
+  nomadik-home:
     interface: personal-files
     read:
     - $HOME/nomad
+  nomadik-system:
+    interface: system-files
+    read:
+    - /sys/fs/cgroup
 
 apps:
   nomad:
@@ -37,7 +41,8 @@ apps:
     plugs:
       - network
       - home
-      - nomadik-config
+      - nomadik-home
+      - nomadik-system
 
 parts:
   nomad:
